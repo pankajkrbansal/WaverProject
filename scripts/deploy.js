@@ -15,10 +15,10 @@ async function main() {
 
   const [usr1] = await hre.ethers.getSigners();
   const balance = await usr1.getBalance();
-  
+
   console.log("Deploying contracts with account: ", usr1.address);
   console.log("Account balance: ", balance.toString());
-  
+
   const waveContract = await hre.ethers.getContractFactory("WavePortal");
   const contract = await waveContract.deploy();
 
@@ -28,10 +28,11 @@ async function main() {
 
   await contract.getTotalWaves();
 
-  let wave = await contract.wave();
+  let wave = await contract.wave("A message");
   wave.wait();
 
   await contract.getTotalWaves();
+
 }
 
 // We recommend this pattern to be able to use async/await everywhere
